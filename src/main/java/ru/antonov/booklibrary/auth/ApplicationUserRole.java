@@ -3,8 +3,7 @@ package ru.antonov.booklibrary.auth;
 import org.springframework.security.core.GrantedAuthority;
 
 public enum ApplicationUserRole implements GrantedAuthority {
-    STUDENT,
-    ADMIN;
+    USER;
 
     @Override
     public String getAuthority() {

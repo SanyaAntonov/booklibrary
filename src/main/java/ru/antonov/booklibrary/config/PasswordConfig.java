@@ -10,6 +10,16 @@ public class PasswordConfig {
 
     @Bean
     public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder(10);
+        return new PasswordEncoder() {
+            @Override
+            public String encode(CharSequence charSequence) {
+                return String.valueOf(charSequence);
+            }
+
+            @Override
+            public boolean matches(CharSequence charSequence, String s) {
+                return String.valueOf(charSequence).equals(s);
+            }
+        };
     }
 }
