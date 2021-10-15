@@ -1,8 +1,8 @@
-package ru.antonov.booklibrary.auth;
+package ru.antonov.booklibrary.entity;
 
 import org.springframework.security.core.GrantedAuthority;
 
-public enum ApplicationUserRole implements GrantedAuthority {
+public enum UserRole implements GrantedAuthority {
     USER;
 
     @Override

@@ -1,4 +1,4 @@
-package ru.antonov.booklibrary.auth;
+package ru.antonov.booklibrary.entity;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -9,11 +9,11 @@ import java.util.Collections;
 
 @Entity
 @Table(name = "users")
-public class ApplicationUser implements UserDetails {
+public class User implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private ApplicationUserRole role;
+    private UserRole role;
     private String password;
     private String userName;
 
@@ -60,11 +60,11 @@ public class ApplicationUser implements UserDetails {
         this.id = id;
     }
 
-    public ApplicationUserRole getRole() {
+    public UserRole getRole() {
         return role;
     }
 
-    public void setRole(ApplicationUserRole role) {
+    public void setRole(UserRole role) {
         this.role = role;
     }
 

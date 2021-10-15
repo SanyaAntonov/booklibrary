@@ -1,22 +1,21 @@
-package ru.antonov.booklibrary.auth;
+package ru.antonov.booklibrary.service;
 
+import lombok.AllArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
+import ru.antonov.booklibrary.repository.UserRepository;
 
 @Service
-public class ApplicationUserService implements UserDetailsService {
+@AllArgsConstructor
+public class UserService implements UserDetailsService {
 
-    private final ApplicationUserRepository applicationUserRepository;
-
-    public ApplicationUserService(ApplicationUserRepository applicationUserRepository) {
-        this.applicationUserRepository = applicationUserRepository;
-    }
+    private final UserRepository userRepository;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        return applicationUserRepository.findByUserName(username)
+        return userRepository.findByUserName(username)
                 .orElseThrow(() -> new UsernameNotFoundException(String.format("Username %s not found", username)));
     }
 }

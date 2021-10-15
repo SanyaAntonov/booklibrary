@@ -5,21 +5,19 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import ru.antonov.booklibrary.auth.ApplicationUser;
-import ru.antonov.booklibrary.auth.ApplicationUserRepository;
-import ru.antonov.booklibrary.auth.ApplicationUserRole;
-
-import java.util.List;
+import ru.antonov.booklibrary.entity.User;
+import ru.antonov.booklibrary.repository.UserRepository;
+import ru.antonov.booklibrary.entity.UserRole;
 
 @Controller
 @AllArgsConstructor
-public class MvcController {
-    private final ApplicationUserRepository userRepository;
+public class HomeController {
+    private final UserRepository userRepository;
 
     @GetMapping("/register")
     public String showForm(Model model) {
-        ApplicationUser user = new ApplicationUser();
-        List<ApplicationUserRole> roles = List.of(ApplicationUserRole.USER);
+        User user = new User();
+        UserRole[] roles = UserRole.values();
 
         model.addAttribute("user", user);
         model.addAttribute("roles", roles);
@@ -28,18 +26,13 @@ public class MvcController {
     }
 
     @PostMapping("/register")
-    public String register(ApplicationUser applicationUser) {
-        userRepository.save(applicationUser);
+    public String register(User user) {
+        userRepository.save(user);
         return "login";
     }
 
     @GetMapping("/login")
     public String login() {
         return "login";
-    }
-
-    @GetMapping("/library")
-    public String library() {
-        return "library";
     }
 }

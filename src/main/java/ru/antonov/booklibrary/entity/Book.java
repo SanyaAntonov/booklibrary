@@ -27,4 +27,7 @@ public class Book {
     private Genre genre;
     @NotNull
     private int quantity;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "userId", nullable = false)
+    private User user;
 }
