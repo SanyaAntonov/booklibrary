@@ -4,34 +4,28 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <html>
 <head>
-    <title>Author list</title>
+    <title>Genre list</title>
 </head>
 <body>
 <section>
-    <h3><a href="library.jsp">Home</a></h3>
+    <h3><a href="/library">Home</a></h3>
     <hr/>
-    <h2>Meals</h2>
-    <a href="meals?action=create">Add Meal</a>
+    <h2>Genres</h2>
+    <a href="genres?action=create">Add Genre</a>
     <br><br>
     <table border="1" cellpadding="8" cellspacing="0">
         <thead>
         <tr>
-            <th>Date</th>
-            <th>Description</th>
-            <th>Calories</th>
+            <th>Name</th>
             <th></th>
             <th></th>
         </tr>
         </thead>
-        <c:forEach items="${meals}" var="meal">
-            <jsp:useBean id="meal" type="ru.antonov.jspcrud.model.MealTo"/>
-            <tr class="${meal.excess ? 'excess' : 'normal'}">
-                <td></td>
-                <td>${meal.description}</td>
-                <td>${meal.calories}</td>
-                <td><a href="meals?action=update&id=${meal.id}">Update</a></td>
-                <td><a href="meals?action=delete&id=${meal.id}">Delete</a></td>
-            </tr>
+        <c:forEach items="${genres}" var="genre">
+            <jsp:useBean id="genre" type="ru.antonov.booklibrary.entity.Genre"/>
+            <td>${genre.name}</td>
+            <td><a href="genres?action=update&id=${genre.name}">Update</a></td>
+            <td><a href="genres?action=delete&id=${genre.name}">Delete</a></td>
         </c:forEach>
     </table>
 </section>

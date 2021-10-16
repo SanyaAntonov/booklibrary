@@ -9,11 +9,11 @@
 <div align="center">
 <h1>Welcome to your Library</h1>
 <h2>Choose category</h2>
-<a href="/genres">Books</a>
+<a href="library/books">Books</a>
 </br>
-<a href="/authors">Authors</a>
+<a href="library/authors">Authors</a>
 </br>
-<a href="/genres">Genres</a>
+<a href="library/genres">Genres</a>
 </div>
 </body>
 </html>

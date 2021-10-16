@@ -8,10 +8,10 @@
 </head>
 <body>
 <section>
-    <h3><a href="library.jsp">Home</a></h3>
+    <h3><a href="/library">Home</a></h3>
     <hr/>
-    <h2>Meals</h2>
-    <a href="meals?action=create">Add Meal</a>
+    <h2>Authors</h2>
+    <a href="authors?action=create">Add Author</a>
     <br><br>
     <table border="1" cellpadding="8" cellspacing="0">
         <thead>
@@ -23,15 +23,13 @@
             <th></th>
         </tr>
         </thead>
-        <c:forEach items="${meals}" var="meal">
-            <jsp:useBean id="meal" type="ru.antonov.booklibrary.entity.Author"/>
-            <tr class="${meal.excess ? 'excess' : 'normal'}">
-                <td></td>
-                <td>${meal.description}</td>
-                <td>${meal.calories}</td>
-                <td><a href="meals?action=update&id=${meal.id}">Update</a></td>
-                <td><a href="meals?action=delete&id=${meal.id}">Delete</a></td>
-            </tr>
+        <c:forEach items="${authors}" var="author">
+            <jsp:useBean id="author" type="ru.antonov.booklibrary.entity.Author"/>
+                <td>${author.id}</td>
+                <td>${author.firstName}</td>
+                <td>${author.lastName}</td>
+                <td><a href="meals?action=update&id=${author.id}">Update</a></td>
+                <td><a href="meals?action=delete&id=${author.id}">Delete</a></td>
         </c:forEach>
     </table>
 </section>
