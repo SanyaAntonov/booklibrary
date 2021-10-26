@@ -1,82 +1,50 @@
 package ru.antonov.booklibrary.entity;
 
+import lombok.Getter;
+import lombok.Setter;
 import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
-import java.util.Collection;
-import java.util.Collections;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.Size;
+import java.util.*;
 
 @Entity
 @Table(name = "users")
-public class User implements UserDetails {
+@Getter
+@Setter
+public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-    private UserRole role;
+    protected Integer id;
+    @Column(nullable = false, unique = true)
+    @Email
+    private String email;
+    @Size(max = 128)
+    private String firstName;
+    @Size(max = 128)
+    private String lastName;
+    @Size(max = 256)
     private String password;
-    private String userName;
+    @Enumerated(EnumType.STRING)
+    @CollectionTable(name = "user_role",
+            joinColumns = @JoinColumn(name = "user_id"),
+            uniqueConstraints = {@UniqueConstraint(columnNames = {"user_id", "role"},
+                    name = "user_roles_unique")})
+    @Column(name = "role")
+    @ElementCollection(fetch = FetchType.EAGER)
+    private List<Role> roles;
 
     @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        return Collections.singleton(role);
-    }
-
-    @Override
-    public String getPassword() {
-        return password;
-    }
-
-    @Override
-    public String getUsername() {
-        return userName;
-    }
-
-    @Override
-    public boolean isAccountNonExpired() {
-        return true;
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        User user = (User) o;
+        return id.equals(user.id);
     }
 
     @Override
-    public boolean isAccountNonLocked() {
-        return true;
-    }
-
-    @Override
-    public boolean isCredentialsNonExpired() {
-        return true;
-    }
-
-    @Override
-    public boolean isEnabled() {
-        return true;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public UserRole getRole() {
-        return role;
-    }
-
-    public void setRole(UserRole role) {
-        this.role = role;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public String getUserName() {
-        return userName;
-    }
-
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public int hashCode() {
+        return Objects.hash(id);
     }
 }

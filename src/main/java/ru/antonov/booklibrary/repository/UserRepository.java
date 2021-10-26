@@ -7,5 +7,5 @@ import ru.antonov.booklibrary.entity.User;
 import java.util.Optional;
 
 public interface UserRepository extends JpaRepository<User, Long> {
-    Optional<User> findByUserName(String userName);
+    Optional<User> findByEmailIgnoreCase(String email);
 }
